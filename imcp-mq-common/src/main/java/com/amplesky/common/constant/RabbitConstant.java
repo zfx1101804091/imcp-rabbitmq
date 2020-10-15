@@ -10,4 +10,9 @@ public interface RabbitConstant {
     String FANOUT_QUEUE_B = "fanout.B";
     String FANOUT_QUEUE_C = "fanout.C";
 
+
+    String TOPIC_QUEUE_D = "topic.d";
+    String TOPIC_QUEUE_E = "topic.e";
+    String TOPIC_EXCHANGE_NAME = "topic-exchange";
+
 }

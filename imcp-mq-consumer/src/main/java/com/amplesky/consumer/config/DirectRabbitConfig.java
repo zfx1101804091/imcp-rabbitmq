@@ -26,7 +26,7 @@ public class DirectRabbitConfig {
      *
      *  一般设置一下队列的持久化就好,其余两个就是默认false
      */
-    @Bean
+    @Bean("testDirectQueue")
     public Queue TestDirectQueue(){
         return new Queue(RabbitConstant.DIRECT_QUEUE,true);
     }
@@ -41,7 +41,7 @@ public class DirectRabbitConfig {
 
     //绑定  将队列和交换机绑定, 并设置用于匹配键：TestDirectRouting
     @Bean
-    public Binding bindingDirect(Queue testDirectQueue, @Qualifier("testDirectExchange") DirectExchange testDirectExchange) {
+    public Binding bindingDirect(@Qualifier("testDirectQueue") Queue testDirectQueue, @Qualifier("testDirectExchange") DirectExchange testDirectExchange) {
         return BindingBuilder.bind(testDirectQueue).to(testDirectExchange).with("TestDirectRouting");
     }
 
