@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: imcp-mq-provider
+  rabbitmq:
+    host: 10.200.195.6
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+server:
+  port: 19012
