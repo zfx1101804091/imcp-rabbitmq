@@ -51,7 +51,7 @@ public class DirectRabbitConfig {
         return new DirectExchange("lonelyDirectExchange");
     }
 
-    //修改RabbitMq默认序列化策略
+    // 修改RabbitMq默认序列化策略
     @Bean
     public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
