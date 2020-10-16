@@ -25,10 +25,10 @@ import java.util.Map;
  */
 
 @Component
-@RabbitListener(queues = RabbitConstant.DIRECT_QUEUE)//监听的队列名称 TestDirectQueue
+//@RabbitListener(queues = RabbitConstant.DIRECT_QUEUE)//监听的队列名称 TestDirectQueue
 public class DirectReceiver2 {
 
-    @RabbitHandler
+    //@RabbitHandler
     public void process(Map testMessage) {
         System.out.println("DirectReceiver消费者收到消息【2】  : " + testMessage.toString());
     }
