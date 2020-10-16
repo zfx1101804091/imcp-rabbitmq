@@ -30,6 +30,11 @@ public class SendMessageController {
         map.put("createTime",createTime);
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
         rabbitTemplate.convertAndSend(RabbitConstant.DIRECT_EXCHANGE_NAME, "TestDirectRouting", map);
+//        rabbitTemplate.convertAndSend(RabbitConstant.DIRECT_EXCHANGE_NAME, "TestDirectRouting", map,message -> {
+//            //发送时设置延迟时间即可
+//            message.getMessageProperties().setHeader("x-delay", 5000);
+//            return message;
+//        });
         return "ok";
     }
 

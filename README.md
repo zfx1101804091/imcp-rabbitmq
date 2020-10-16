@@ -86,4 +86,4 @@ spring:
     }
 ```
 #### 生产者回调详解
-![Image text](https://github.com/your_github/address/blob/master/image/1.png)
+![Image text](https://img-blog.csdnimg.cn/20190420091742485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQxOTEzMw==,size_16,color_FFFFFF,t_70)

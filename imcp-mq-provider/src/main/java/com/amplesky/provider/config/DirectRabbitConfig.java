@@ -1,15 +1,15 @@
 package com.amplesky.provider.config;
 
 import com.amplesky.common.constant.RabbitConstant;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * direct exchange(直连型交换机)
@@ -34,8 +34,10 @@ public class DirectRabbitConfig {
     //Direct交换机 起名：TestDirectExchange
     @Bean("testDirectExchange")
     public DirectExchange testDirectExchange() {
-        //  return new DirectExchange("TestDirectExchange",true,true);
-        return new DirectExchange(RabbitConstant.DIRECT_EXCHANGE_NAME,true,false);
+        DirectExchange directExchange = new DirectExchange(RabbitConstant.DIRECT_EXCHANGE_NAME, true, false);
+        //延时队列
+//        directExchange.setDelayed(true);
+        return directExchange;
     }
 
 

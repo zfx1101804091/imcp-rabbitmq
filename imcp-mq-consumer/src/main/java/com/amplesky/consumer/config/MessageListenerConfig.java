@@ -22,6 +22,11 @@ public class MessageListenerConfig {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         container.setConcurrentConsumers(1);
         container.setMaxConcurrentConsumers(1);
+        /**
+         * AcknowledgeMode.NONE：自动确认
+         * AcknowledgeMode.AUTO：根据情况确认
+         * AcknowledgeMode.MANUAL：手动确认
+         */
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL); // RabbitMQ默认是自动确认，这里改为手动确认消息
         //设置一个队列
         container.setQueueNames("direct-queue","fanout.A");
