@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-@RabbitListener(queues = "fanout.A")
+//@RabbitListener(queues = "fanout.A")
 public class FanoutReceiverA {
 
-    @RabbitHandler
+//    @RabbitHandler
     public void process(Map testMessage) {
         System.out.println("FanoutReceiverA消费者收到消息  : " +testMessage.toString());
     }
