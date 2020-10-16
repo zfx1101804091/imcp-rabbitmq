@@ -30,11 +30,6 @@ public class SendMessageController {
         map.put("createTime",createTime);
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
         rabbitTemplate.convertAndSend(RabbitConstant.DIRECT_EXCHANGE_NAME, "TestDirectRouting", map);
-//        rabbitTemplate.convertAndSend(RabbitConstant.DIRECT_EXCHANGE_NAME, "TestDirectRouting", map,message -> {
-//            //发送时设置延迟时间即可
-//            message.getMessageProperties().setHeader("x-delay", 5000);
-//            return message;
-//        });
         return "ok";
     }
 
@@ -172,5 +167,26 @@ public class SendMessageController {
         return "ok";
     }
 
+    /**
+     * 延迟队列
+     * @return
+     */
+    @GetMapping("/sendDelayMessage")
+    public String sendDelayMessage() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: sendDelayMessage test message ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        // String exchange, String routingKey, Object object
+        rabbitTemplate.convertAndSend("delay.exchange", "delay-queue", map,message -> {
+            //延迟队列
+            message.getMessageProperties().setHeader("x-delay",10000);
+            return message;
+        });
+        return "ok";
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.amplesky.provider.config;
 
 import com.amplesky.common.constant.RabbitConstant;
+import jdk.internal.org.objectweb.asm.commons.RemappingSignatureAdapter;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -35,8 +36,6 @@ public class DirectRabbitConfig {
     @Bean("testDirectExchange")
     public DirectExchange testDirectExchange() {
         DirectExchange directExchange = new DirectExchange(RabbitConstant.DIRECT_EXCHANGE_NAME, true, false);
-        //延时队列
-//        directExchange.setDelayed(true);
         return directExchange;
     }
 
@@ -57,6 +56,36 @@ public class DirectRabbitConfig {
     @Bean("lonelyDirectExchange")
     public DirectExchange lonelyDirectExchange() {
         return new DirectExchange("lonelyDirectExchange");
+    }
+
+
+    /**
+     *  延迟队列
+     */
+    @Bean
+    public Queue delayQueue(){
+        return new Queue("delay-queue");
+    }
+
+    /**
+     *  延迟队列交换器 x-delayed-type 和 x-delayed-message 固定
+     */
+    @Bean
+    public CustomExchange delayExchange(){
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-delayed-type","direct");
+        return new CustomExchange("delay.exchange","x-delayed-message",true,false,args);
+    }
+
+    /**
+     *  延迟队列绑定自定义交换器
+     */
+    @Bean
+    public Binding delayBinding(){
+        return BindingBuilder.bind(delayQueue())
+                             .to(delayExchange())
+                             .with("delay-queue")
+                             .noargs();
     }
 
     // 修改RabbitMq默认序列化策略
