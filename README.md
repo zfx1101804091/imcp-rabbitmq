@@ -37,6 +37,24 @@
      * ③消息推送到sever，交换机和队列啥都没找到 ==>> ConfirmCallback
      * ④消息推送成功 ==>> ConfirmCallback
 ```
+**application.yml**
+```
+spring:
+  application:
+    name: imcp-mq-provider
+  rabbitmq:
+    host: 10.200.195.6
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    ## 消息确认配置项
+    publisher-confirms: true # 确认消息已经发送到交换机(Exchange)
+    publisher-returns: true  # 确认消息已发送到队列(Queue)
+
+
+```
+
 **RabbitmqConfig**
 ```
 @Bean
